@@ -1,50 +1,50 @@
 <template>
   <div
-    id="app"
-    :class="{ 'has-mouse': hasMouse }"
-    @touchstart="hasMouse = false"
+      id="app"
+      :class="{ 'has-mouse': hasMouse }"
+      @touchstart="hasMouse = false"
   >
     <Ribbon
-      text="Fork me on GitHub"
-      url="https://github.com/ts1/flipbook-vue"
+        text="Fork me on GitHub"
+        url="https://github.com/ts1/flipbook-vue"
     />
     <Flipbook
-      class="flipbook"
-      :pages="pages"
-      :pagesHiRes="pagesHiRes"
-      :startPage="pageNum"
-      v-slot="flipbook"
-      ref="flipbook"
-      @flip-left-start="onFlipLeftStart"
-      @flip-left-end="onFlipLeftEnd"
-      @flip-right-start="onFlipRightStart"
-      @flip-right-end="onFlipRightEnd"
-      @zoom-start="onZoomStart"
-      @zoom-end="onZoomEnd"
+        class="flipbook"
+        :pages="pages"
+        :pagesHiRes="pagesHiRes"
+        :startPage="pageNum"
+        v-slot="flipbook"
+        ref="flipbook"
+        @flip-left-start="onFlipLeftStart"
+        @flip-left-end="onFlipLeftEnd"
+        @flip-right-start="onFlipRightStart"
+        @flip-right-end="onFlipRightEnd"
+        @zoom-start="onZoomStart"
+        @zoom-end="onZoomEnd"
     >
       <div class="action-bar">
         <left-icon
-          class="btn left"
-          :class="{ disabled: !flipbook.canFlipLeft }"
-          @click="flipbook.flipLeft"
+            class="btn left"
+            :class="{ disabled: !flipbook.canFlipLeft }"
+            @click="flipbook.flipLeft"
         />
         <plus-icon
-          class="btn plus"
-          :class="{ disabled: !flipbook.canZoomIn }"
-          @click="flipbook.zoomIn"
+            class="btn plus"
+            :class="{ disabled: !flipbook.canZoomIn }"
+            @click="flipbook.zoomIn"
         />
         <span class="page-num">
           Page {{ flipbook.page }} of {{ flipbook.numPages }}
         </span>
         <minus-icon
-          class="btn minus"
-          :class="{ disabled: !flipbook.canZoomOut }"
-          @click="flipbook.zoomOut"
+            class="btn minus"
+            :class="{ disabled: !flipbook.canZoomOut }"
+            @click="flipbook.zoomOut"
         />
         <right-icon
-          class="btn right"
-          :class="{ disabled: !flipbook.canFlipRight }"
-          @click="flipbook.flipRight"
+            class="btn right"
+            :class="{ disabled: !flipbook.canFlipRight }"
+            @click="flipbook.flipRight"
         />
       </div>
     </Flipbook>
@@ -66,7 +66,7 @@ import Flipbook from './Flipbook'
 
 export default
   name: 'app'
-  components: { Flipbook, LeftIcon, RightIcon, PlusIcon, MinusIcon, Ribbon }
+  components: {Flipbook, LeftIcon, RightIcon, PlusIcon, MinusIcon, Ribbon}
   data: ->
     pages: [],
     pagesHiRes: [],
