@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot
-      v-bind="{
+        v-bind="{
         canFlipLeft,
         canFlipRight,
         canZoomIn,
@@ -15,63 +15,63 @@
       }"
     />
     <div
-      class="viewport"
-      ref="viewport"
-      :class="{
+        class="viewport"
+        ref="viewport"
+        :class="{
         zoom: zooming || zoom > 1,
         'drag-to-scroll': dragToScroll,
       }"
-      :style="{ cursor: cursor == 'grabbing' ? 'grabbing' : 'auto' }"
-      @touchmove="onTouchMove"
-      @pointermove="onPointerMove"
-      @mousemove="onMouseMove"
-      @touchend="onTouchEnd"
-      @touchcancel="onTouchEnd"
-      @pointerup="onPointerUp"
-      @pointercancel="onPointerUp"
-      @mouseup="onMouseUp"
-      @wheel="onWheel"
+        :style="{ cursor: cursor == 'grabbing' ? 'grabbing' : 'auto' }"
+        @touchmove="onTouchMove"
+        @pointermove="onPointerMove"
+        @mousemove="onMouseMove"
+        @touchend="onTouchEnd"
+        @touchcancel="onTouchEnd"
+        @pointerup="onPointerUp"
+        @pointercancel="onPointerUp"
+        @mouseup="onMouseUp"
+        @wheel="onWheel"
     >
       <div class="flipbook-container" :style="{ transform: `scale(${zoom})` }">
         <div
-          class="click-to-flip left"
-          :style="{ cursor: canFlipLeft ? 'pointer' : 'auto' }"
-          @click="flipLeft"
+            class="click-to-flip left"
+            :style="{ cursor: canFlipLeft ? 'pointer' : 'auto' }"
+            @click="flipLeft"
         />
         <div
-          class="click-to-flip right"
-          :style="{ cursor: canFlipRight ? 'pointer' : 'auto' }"
-          @click="flipRight"
+            class="click-to-flip right"
+            :style="{ cursor: canFlipRight ? 'pointer' : 'auto' }"
+            @click="flipRight"
         />
         <div :style="{ transform: `translateX(${centerOffsetSmoothed}px)` }">
           <img
-            class="page fixed"
-            :style="{
+              class="page fixed"
+              :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
               left: xMargin + 'px',
               top: yMargin + 'px',
             }"
-            :src="pageUrlLoading(leftPage, true)"
-            v-if="showLeftPage"
-            @load="didLoadImage($event)"
+              :src="pageUrlLoading(leftPage, true)"
+              v-if="showLeftPage"
+              @load="didLoadImage($event)"
           />
           <img
-            class="page fixed"
-            :style="{
+              class="page fixed"
+              :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
               left: viewWidth / 2 + 'px',
               top: yMargin + 'px',
             }"
-            v-if="showRightPage"
-            :src="pageUrlLoading(rightPage, true)"
-            @load="didLoadImage($event)"
+              v-if="showRightPage"
+              :src="pageUrlLoading(rightPage, true)"
+              @load="didLoadImage($event)"
           />
 
           <div :style="{ opacity: flip.opacity }">
             <div
-              v-for="[
+                v-for="[
                 key,
                 bgImage,
                 lighting,
@@ -79,10 +79,10 @@
                 transform,
                 z,
               ] in polygonArray"
-              class="polygon"
-              :key="key"
-              :class="{ blank: !bgImage }"
-              :style="{
+                class="polygon"
+                :key="key"
+                :class="{ blank: !bgImage }"
+                :style="{
                 backgroundImage: bgImage && `url(${loadImage(bgImage)})`,
                 backgroundSize: polygonBgSize,
                 backgroundPosition: bgPos,
@@ -93,24 +93,24 @@
               }"
             >
               <div
-                class="lighting"
-                v-show="lighting.length"
-                :style="{ backgroundImage: lighting }"
+                  class="lighting"
+                  v-show="lighting.length"
+                  :style="{ backgroundImage: lighting }"
               />
             </div>
           </div>
           <div
-            class="bounding-box"
-            :style="{
+              class="bounding-box"
+              :style="{
               left: boundingLeft + 'px',
               top: yMargin + 'px',
               width: boundingRight - boundingLeft + 'px',
               height: pageHeight + 'px',
               cursor: cursor,
             }"
-            @touchstart="onTouchStart"
-            @pointerdown="onPointerDown"
-            @mousedown="onMouseDown"
+              @touchstart="onTouchStart"
+              @pointerdown="onPointerDown"
+              @mousedown="onMouseDown"
           />
         </div>
       </div>
@@ -242,7 +242,7 @@ export default
       not @flip.direction and @currentPage < @pages.length - @displayedPages
     canGoBack: ->
       not @flip.direction and @currentPage >= @displayedPages and
-        not (@displayedPages == 1 and not @pageUrl(@firstPage - 1))
+          not (@displayedPages == 1 and not @pageUrl(@firstPage - 1))
     leftPage: ->
       if @forwardDirection == 'right' or @displayedPages == 1
         @firstPage
@@ -333,7 +333,7 @@ export default
       if w < @viewWidth
         (@boundingLeft + @centerOffsetSmoothed) * @zoom - (@viewWidth - w) / 2
       else
-        (@boundingRight + @centerOffsetSmoothed)* @zoom - @viewWidth
+        (@boundingRight + @centerOffsetSmoothed) * @zoom - @viewWidth
 
     scrollTopMin: ->
       h = @pageHeight * @zoom
@@ -356,13 +356,13 @@ export default
       Math.min(@scrollTopMax, Math.max(@scrollTopMin, @scrollTop))
 
   mounted: ->
-    window.addEventListener 'resize',  @onResize, passive: true
+    window.addEventListener 'resize', @onResize, passive: true
     @onResize()
     @zoom = @zooms_[0]
     @goToPage @startPage
 
   beforeDestroy: ->
-    window.removeEventListener 'resize',  @onResize, passive: true
+    window.removeEventListener 'resize', @onResize, passive: true
 
   methods:
     onResize: ->
@@ -371,7 +371,7 @@ export default
       @viewWidth = viewport.clientWidth
       @viewHeight = viewport.clientHeight
       @displayedPages =
-        if @viewWidth > @viewHeight and not @singlePage then 2 else 1
+          if @viewWidth > @viewHeight and not @singlePage then 2 else 1
       @currentPage &= ~1 if @displayedPages == 2
       @fixFirstPage()
       @minX = Infinity
@@ -379,17 +379,17 @@ export default
 
     fixFirstPage: ->
       @currentPage++ if @displayedPages == 1 and
-        @currentPage == 0 and
-        @pages.length and
-        not @pageUrl(0)
+          @currentPage == 0 and
+          @pages.length and
+          not @pageUrl(0)
 
-    pageUrl: (page, hiRes=false) ->
+    pageUrl: (page, hiRes = false) ->
       if hiRes and @zoom > 1 and not @zooming
         url = @pagesHiRes[page]
         return url if url
       @pages[page] or null
 
-    pageUrlLoading: (page, hiRes=false) ->
+    pageUrlLoading: (page, hiRes = false) ->
       url = @pageUrl(page, hiRes)
       # High-res image doesn't use 'loading'
       return url if hiRes and @zoom > 1 and not @zooming
@@ -414,10 +414,10 @@ export default
         direction = @forwardDirection
 
       @flip.opacity =
-        if @displayedPages == 1 and progress > .7
-          1 - (progress - .7) / .3
-        else
-          1
+          if @displayedPages == 1 and progress > .7
+            1 - (progress - .7) / .3
+          else
+            1
 
       image =
         if face == 'front'
@@ -519,7 +519,7 @@ export default
 
         radian += dRadian
         rotate += dRotate
-        [face+i, image, lighting, bgPos, m.toString(), Math.abs(Math.round(z))]
+        [face + i, image, lighting, bgPos, m.toString(), Math.abs(Math.round(z))]
 
     computeLighting: (rot, dRotate) ->
       gradients = []
@@ -542,8 +542,8 @@ export default
         POW = 200
         specular = lightingPoints.map (d) =>
           Math.max(
-            Math.cos((rot + DEG - dRotate * d) / 180 * Math.PI) ** POW,
-            Math.cos((rot - DEG - dRotate * d) / 180 * Math.PI) ** POW
+              Math.cos((rot + DEG - dRotate * d) / 180 * Math.PI) ** POW,
+              Math.cos((rot - DEG - dRotate * d) / 180 * Math.PI) ** POW
           )
         gradients.push """
           linear-gradient(to right,
@@ -742,7 +742,7 @@ export default
       return unless @touchStartX?
       @zoomAt touch if @clickToZoom and @maxMove < @swipeMin
       if @flip.direction != null and not @flip.auto
-        if @flip.progress > 1/4
+        if @flip.progress > 1 / 4
           @flipAuto(false)
         else
           @flipRevert()
@@ -819,8 +819,8 @@ export default
 
     loadImage: (url) ->
       if @imageWidth == null
-        # First loaded image defines the image width and height.
-        # So it must be true image, not 'loading' image.
+# First loaded image defines the image width and height.
+# So it must be true image, not 'loading' image.
         url
       else
         if @loadedImages[url]
